@@ -4,11 +4,12 @@ import Perfil from '../screens/Perfil';
 import Search from '../screens/Search';
 import Tweet from '../screens/Tweet';
 import Login from '../screens/Login'
+import SplashScreen from "../screens/Splash/Splash";
 export default function stackRoutes() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Splash" screenOptions={{headerShown: false}}>
       <Stack.Screen name="Feed" component={Feed} 
       options={{
         headerTitle: "Tela de Home Stack"
@@ -18,6 +19,7 @@ export default function stackRoutes() {
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="Tweet" component={Tweet} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Splash" component={SplashScreen}/>
 
     </Stack.Navigator>
   );
