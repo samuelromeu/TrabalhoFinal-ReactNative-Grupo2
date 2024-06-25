@@ -6,13 +6,17 @@ import Search from '../screens/Search';
 import Tweet from '../screens/Tweet';
 import Login from '../screens/Login';
 import SplashScreen from '../screens/Splash';
+import Routes from '.';
+
 
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
+    
     <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
-      <Stack.Screen
+      <Stack.Screen name='Routes' component={Routes}/>
+      {/* <Stack.Screen
         name="Feed"
         component={Feed}
         options={{
@@ -23,8 +27,9 @@ export default function StackRoutes() {
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="Tweet" component={Tweet} />
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Splash" component={SplashScreen} />
+      <Stack.Screen name="Splash" component={SplashScreen} /> */}
     </Stack.Navigator>
+    
   );
 }
 

@@ -5,8 +5,6 @@ import Routes from './routes';
 
 export default function App() {
   return (
-  //   <NavigationContainer>
-   <Routes/>
-  //  </NavigationContainer>
+    <Routes/>
   );
 }
