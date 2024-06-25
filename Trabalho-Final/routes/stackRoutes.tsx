@@ -6,6 +6,9 @@ import Search from '../screens/Search';
 import Tweet from '../screens/Tweet';
 import Login from '../screens/Login';
 import SplashScreen from '../screens/Splash';
+import LoginScreen from '../screens/Login/LoginScreen';
+import { SignUpScreen } from '../screens/Login/SignUpScreen';
+import MainScreen from '../screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,8 +25,10 @@ export default function StackRoutes() {
       <Stack.Screen name="Perfil" component={Perfil} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="Tweet" component={Tweet} />
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Splash" component={SplashScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="Main" component={MainScreen} />
     </Stack.Navigator>
   );
 }

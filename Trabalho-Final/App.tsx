@@ -26,6 +26,7 @@ import {useAuth} from './service/AuthContext';
 import LoginScreen from './screens/Login/LoginScreen';
 import { SignUpScreen } from './screens/Login/SignUpScreen';
 import MainScreen from './screens/HomeScreen';
+import StackRoutes from './routes/stackRoutes';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -40,26 +41,9 @@ const App: React.FC = () => {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <Routes></Routes>
+        <StackRoutes />
       </AuthProvider>
     </NavigationContainer>
-  );
-};
-
-const Routes: React.FC = () => {
-  const { signed } = useAuth();
-
-  return (
-    <Stack.Navigator initialRouteName={signed ? "Main" : "Login"}>
-      {!signed ? (
-        <>
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
-        </>
-      ) : (
-        <Stack.Screen name="Main" component={MainScreen} />
-      )}
-    </Stack.Navigator>
   );
 };
 
