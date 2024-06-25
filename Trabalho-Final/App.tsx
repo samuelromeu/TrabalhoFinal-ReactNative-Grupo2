@@ -5,8 +5,8 @@ import Routes from './routes';
 
 export default function App() {
   return (
-    <NavigationContainer >
-      <StackRoutes />
-    </NavigationContainer>
+  //   <NavigationContainer>
+   <Routes/>
+  //  </NavigationContainer>
   );
 }

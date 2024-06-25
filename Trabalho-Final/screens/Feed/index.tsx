@@ -5,7 +5,7 @@ import { StyleSheet, View, Text, Dimensions } from 'react-native'
 export default function Feed() {
   return (
     <View style={styles.container}>
-      <Text>Feed</Text>
+      <Text></Text>
     </View>
   )
   }
