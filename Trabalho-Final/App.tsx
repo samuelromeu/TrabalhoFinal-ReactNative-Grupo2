@@ -26,6 +26,7 @@ import {useAuth} from './service/AuthContext';
 import LoginScreen from './screens/Login/LoginScreen';
 import { SignUpScreen } from './screens/Login/SignUpScreen';
 import MainScreen from './screens/HomeScreen';
+import Feed from './screens/Feed';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -38,11 +39,12 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const App: React.FC = () => {
   return (
-    <NavigationContainer>
-      <AuthProvider>
-        <Routes></Routes>
-      </AuthProvider>
-    </NavigationContainer>
+    <Feed/>
+    // <NavigationContainer>
+    //   <AuthProvider>
+    //     <Routes></Routes>
+    //   </AuthProvider>
+    // </NavigationContainer>
   );
 };
 
