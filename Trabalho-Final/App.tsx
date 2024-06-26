@@ -27,6 +27,7 @@ import LoginScreen from './screens/Login/LoginScreen';
 import { SignUpScreen } from './screens/Login/SignUpScreen';
 import MainScreen from './screens/HomeScreen';
 import StackRoutes from './routes/stackRoutes';
+import Feed from './screens/Feed';
 
 export type RootStackParamList = {
   Login: undefined;

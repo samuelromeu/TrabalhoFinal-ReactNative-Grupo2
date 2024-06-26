@@ -6,6 +6,7 @@ import Search from '../screens/Search';
 import Tweet from '../screens/Tweet';
 import Login from '../screens/Login';
 import SplashScreen from '../screens/Splash';
+import Routes from '.';
 import LoginScreen from '../screens/Login/LoginScreen';
 import { SignUpScreen } from '../screens/Login/SignUpScreen';
 import MainScreen from '../screens/HomeScreen';
@@ -14,6 +15,7 @@ const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
+    
     <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="Feed"
@@ -30,6 +32,7 @@ export default function StackRoutes() {
       <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="Main" component={MainScreen} />
     </Stack.Navigator>
+    
   );
 }
 
