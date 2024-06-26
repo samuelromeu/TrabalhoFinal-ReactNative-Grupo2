@@ -28,7 +28,7 @@ export default function Routes() {
         drawerActiveTintColor: "#00ff",
         drawerStyle: {
           backgroundColor: "#fafaf2",
-          width: 240,
+          width: 300,
         },
       }}
     >

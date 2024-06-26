@@ -1,7 +1,8 @@
 import React, { createContext, useState, ReactNode, useContext } from 'react';
 import axios from 'axios';
 import api from './api';
-import { UserT, PostT} from '../types/UserT'
+import { UserT } from '../types/UserT'
+import { PostT } from '../types/PostT'
 
 interface AuthContextData {
   signed: boolean;

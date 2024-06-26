@@ -7,6 +7,8 @@ export default function CustomDrawer(props) {
     <DrawerContentScrollView>
       <View
         style={{
+          marginTop: 20,
+          marginBottom: 20,
           width: "100%",
           height: 85,
           alignItems: "center",

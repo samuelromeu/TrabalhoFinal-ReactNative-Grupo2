@@ -5,9 +5,3 @@ export interface UserT {
   senha: string;
   bio: string;
 }
-
-export interface PostT {
-  id: number;
-  mensagem: string;
-  nome: string;
-}

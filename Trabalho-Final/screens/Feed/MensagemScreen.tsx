@@ -20,7 +20,7 @@ export const MensagemScreen: React.FC = () => {
       return;
     }
     setLocalError(null);
-    const nome = user?.nome;
+    const nome = user?.nome || 'Anônimo';
     const newPost = { mensagem, nome};
     await sigPost(newPost);
   };
