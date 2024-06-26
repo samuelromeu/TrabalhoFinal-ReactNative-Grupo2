@@ -20,7 +20,7 @@ const LoginScreen: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      navigation.navigate('Main'); // Navegue para a tela principal após o login bem-sucedido
+      navigation.navigate('Inicio'); // Navegue para a tela principal após o login bem-sucedido
     }
   }, [user]);
 

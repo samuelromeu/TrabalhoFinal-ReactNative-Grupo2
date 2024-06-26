@@ -28,12 +28,14 @@ import { SignUpScreen } from './screens/Login/SignUpScreen';
 import MainScreen from './screens/HomeScreen';
 import StackRoutes from './routes/stackRoutes';
 import Feed from './screens/Feed';
+import Routes from './routes';
 
 export type RootStackParamList = {
   Login: undefined;
   SignUp: undefined;
   Main: undefined;
   SignPost: undefined;
+  Inicio: undefined;
 };
 
 
@@ -43,7 +45,7 @@ const App: React.FC = () => {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <StackRoutes />
+        <Routes/>
       </AuthProvider>
     </NavigationContainer>
   );

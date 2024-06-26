@@ -12,13 +12,15 @@ export const MensagemScreen: React.FC = () => {
   const [mensagem, setMensagem] = useState('');
   const [nome, setNome] = useState('');
   const [localError, setLocalError] = useState<string | null>(null);
+  const { user } = useContext(AuthContext);
 
   const handleSignUp = async () => {
-    if (!mensagem || !nome) {
+    if (!mensagem) {
       setLocalError('Todos os campos são obrigatórios.');
       return;
     }
     setLocalError(null);
+    const nome = user?.nome;
     const newPost = { mensagem, nome};
     await sigPost(newPost);
   };
@@ -34,12 +36,12 @@ export const MensagemScreen: React.FC = () => {
         value={mensagem}
         onChangeText={setMensagem}
       />
-      <TextInput
+      {/* <TextInput
         style={styles.input}
         placeholder="Nome"
         value={nome}
         onChangeText={setNome}
-      />
+      /> */}
       <Button title="Enviar" onPress={handleSignUp} />
     </View>
   );
