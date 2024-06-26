@@ -1,15 +1,17 @@
 import React, { createContext, useState, ReactNode, useContext } from 'react';
 import axios from 'axios';
-import api from '../service/api';
-import { UserT } from '../types/UserT';
+import api from './api';
+import { UserT, PostT} from '../types/UserT'
 
 interface AuthContextData {
   signed: boolean;
   user: UserT | null;
   errorMessage: string | null;
+  post: PostT | null;
   signIn(email: string, senha: string): Promise<void>;
   signOut(): void;
   signUp(newUser: Omit<UserT, 'id'>): Promise<void>;
+  sigPost(newPost: Omit<PostT, 'id'>): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -21,7 +23,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<UserT | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+  const [post, setPost] = useState<PostT | null>(null);
   const validateEmail = (email: string) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
@@ -75,8 +77,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const sigPost = async (newPost: Omit<PostT, 'id'>) => {
+    try {
+      const response = await api.post<PostT>('/post', { ...newPost, id: Math.random() });
+      setPost(response.data);
+      setErrorMessage(null);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response && error.response.data) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage('Erro ao cadastrar mensagem');
+      }
+      console.error('Erro ao cadastrar mensagem:', error);
+    }
+  };
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, errorMessage, signIn, signOut, signUp }}>
+    <AuthContext.Provider value={{ signed: !!user, user, post, errorMessage, signIn, signOut, signUp, sigPost }}>
       {children}
     </AuthContext.Provider>
   );
@@ -85,3 +101,4 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 export const useAuth = () => useContext(AuthContext);
 
 export default AuthContext;
+

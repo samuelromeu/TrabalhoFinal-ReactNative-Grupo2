@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../App';
 import AuthContext from '../../service/AuthContext';
+// import {MensagemScreen} from '../Feed/MensagemScreen';
 
 type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
@@ -25,6 +26,7 @@ const LoginScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      {/* <MensagemScreen/> */}
       {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
       <TextInput
         style={styles.input}

@@ -1,91 +1,65 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { StyleSheet, View, Text, Dimensions, ScrollView, TextInput } from 'react-native'
-import axios from 'axios';
+//COLOCAR PARA PUXAR O NOME DA PESSOA PELO LOGIN
+
+import React, { useContext, useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import AuthContext from '../../service/AuthContext';
+import { RootStackParamList } from '../../App';
 
-const MensagemScreen: React.FC = () => {
-    const { signUp, errorMessage } = useContext(AuthContext);
-    const [posts, setPosts] = useState<any[]>([]);
-    const [mensagem, setMensagem] = useState('');
-    const [nome, setNome] = useState('');
-    const [tags, setTags] = useState('');
+export const MensagemScreen: React.FC = () => {
+  const { sigPost, errorMessage, post } = useContext(AuthContext);
+  const [mensagem, setMensagem] = useState('');
+  const [nome, setNome] = useState('');
+  const [localError, setLocalError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/mensagem');
-        setPosts(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar mensagens:', error);
-      }
-    };
+  const handleSignUp = async () => {
+    if (!mensagem || !nome) {
+      setLocalError('Todos os campos são obrigatórios.');
+      return;
+    }
+    setLocalError(null);
+    const newPost = { mensagem, nome};
+    await sigPost(newPost);
+  };
 
-    const handleSignUp = async () => {
-      if (!mensagem || !nome || !tags) {
-        setErrorMessage('Preencha todos os campos');
-        return;
-      }
-      const newPost = { mensagem, nome, tags };
-      await signUp(newPost);
-      setMensagem('');
-      setNome('');
-      setTags('');
-    };
-
-    fetchData();
-    }, []);
-
-  const styles = StyleSheet.create({
-      container: {
-        padding: 10
-      },
-      post: {
-        marginBottom: 10,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 10
-      },
-      title: {
-        fontSize: 20,
-        fontWeight: 'bold'
-      },
-      body: {
-        marginTop: 5
-      }
-    });
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {posts.map((post: any) => (
-          <View key={post.id} style={styles.post}>
-            <Text style={styles.title}>{post.usuario.nome}</Text>
-            <Text style={styles.body}>{post.mensagem}</Text>
-          </View> 
-        ))}
-      </View>
-      <View style={styles.post}>
-        <Text style={styles.title}>Nova Mensagem</Text>
-        <TextInput
-          style={styles.body}
-          placeholder="Mensagem"
-          value={mensagem}
-          onChangeText={setMensagem}
-        />
-        <TextInput
-          style={styles.body}
-          placeholder="Nome"
-          value={nome}
-          onChangeText={setNome}
-        />
-        <TextInput
-          style={styles.body}
-          placeholder="Tags"
-          value={tags}
-          onChangeText={setTags}
-        />
-        <Button title="Enviar" onPress={handleSignUp} />
-      </View>
-    </ScrollView>
-    );
+    <View style={styles.container}>
+      {localError && <Text style={styles.error}>{localError}</Text>}
+      {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
+      <TextInput
+        style={styles.input}
+        placeholder="Mensagem"
+        value={mensagem}
+        onChangeText={setMensagem}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+      />
+      <Button title="Enviar" onPress={handleSignUp} />
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 16,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 12,
+    padding: 8,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 12,
+  },
+});
