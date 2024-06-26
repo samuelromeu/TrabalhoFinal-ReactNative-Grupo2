@@ -1,21 +1,40 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import AuthContext from '../../service/AuthContext';
+import { RootStackParamList } from '../../App';
+
+type SignUpScreenNavigationProp = StackNavigationProp<RootStackParamList, 'SignUp'>;
 
 export const SignUpScreen: React.FC = () => {
-  const { signUp, errorMessage } = useContext(AuthContext);
+  const { signUp, errorMessage, user } = useContext(AuthContext);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [bio, setBio] = useState('');
+  const [localError, setLocalError] = useState<string | null>(null);
+  const navigation = useNavigation<SignUpScreenNavigationProp>();
 
   const handleSignUp = async () => {
+    if (!nome || !email || !senha || !bio) {
+      setLocalError('Todos os campos são obrigatórios.');
+      return;
+    }
+    setLocalError(null);
     const newUser = { nome, email, senha, bio };
     await signUp(newUser);
   };
 
+  useEffect(() => {
+    if (user) {
+      navigation.navigate('Main'); // Navegue para a tela principal após o cadastro bem-sucedido
+    }
+  }, [user, navigation]);
+
   return (
     <View style={styles.container}>
+      {localError && <Text style={styles.error}>{localError}</Text>}
       {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
       <TextInput
         style={styles.input}
@@ -65,5 +84,3 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 });
-
-
