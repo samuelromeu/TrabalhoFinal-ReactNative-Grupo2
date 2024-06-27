@@ -1,7 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Feather from 'react-native-vector-icons/Feather';
-import Feed from '../screens/Feed';
 import Perfil from '../screens/Perfil';
 import Search from '../screens/Search';
 import Tweet from '../screens/Tweet';

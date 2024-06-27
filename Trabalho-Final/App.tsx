@@ -22,12 +22,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthProvider} from './service/AuthContext';
-import {useAuth} from './service/AuthContext';
-import LoginScreen from './screens/Login/LoginScreen';
-import { SignUpScreen } from './screens/Login/SignUpScreen';
-import MainScreen from './screens/HomeScreen';
-import StackRoutes from './routes/stackRoutes';
-import Feed from './screens/Feed';
 import Routes from './routes';
 
 export type RootStackParamList = {
