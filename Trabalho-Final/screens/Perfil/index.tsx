@@ -7,6 +7,9 @@ import { useAuth } from '../../contexts/AuthContext';
 export default function Perfil() {
   
   const { user, signed } = useAuth();
+  console.log(user?.nome);
+   const name = user?.nome
+
   return ( 
     <SafeAreaView>
       <View  style={styles.Header} >
@@ -23,8 +26,9 @@ export default function Perfil() {
 
         <View style={styles.InfoPerfil}>
        <View>
-        <Text style={styles.NomePerfil}>NomeUsuario</Text>
-        <Text style={styles.ArrobaPerfil}>@Usario{user?.nome}</Text>
+        
+        <Text style={styles.NomePerfil}>{name}</Text>
+        <Text style={styles.ArrobaPerfil}>dfdfd</Text>
        </View>
 
       <TouchableOpacity style={styles.button} >
