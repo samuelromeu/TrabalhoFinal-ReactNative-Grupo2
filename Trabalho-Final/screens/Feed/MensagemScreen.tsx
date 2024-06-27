@@ -1,18 +1,12 @@
-//COLOCAR PARA PUXAR O NOME DA PESSOA PELO LOGIN
-
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState} from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import AuthContext from '../../service/AuthContext';
-import { RootStackParamList } from '../../App';
 
 export const MensagemScreen: React.FC = () => {
-  const { sigPost, errorMessage, post } = useContext(AuthContext);
+  const { sigPost, errorMessage } = useContext(AuthContext);
   const [mensagem, setMensagem] = useState('');
-  const [nome, setNome] = useState('');
   const [localError, setLocalError] = useState<string | null>(null);
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext)
 
   const handleSignUp = async () => {
     if (!mensagem) {
@@ -20,11 +14,10 @@ export const MensagemScreen: React.FC = () => {
       return;
     }
     setLocalError(null);
-    const nome = user?.nome || 'Anônimo';
-    const newPost = { mensagem, nome};
+    const nomeUsuario = user?.nome || 'Anônimo';
+    const newPost = { mensagem, nomeUsuario };
     await sigPost(newPost);
   };
-
 
   return (
     <View style={styles.container}>
@@ -32,7 +25,7 @@ export const MensagemScreen: React.FC = () => {
       {errorMessage && <Text style={styles.error}>{errorMessage}</Text>}
       <TextInput
         style={styles.input}
-        placeholder="Mensagem"
+        placeholder='Mensagem'
         value={mensagem}
         onChangeText={setMensagem}
       />
@@ -42,7 +35,7 @@ export const MensagemScreen: React.FC = () => {
         value={nome}
         onChangeText={setNome}
       /> */}
-      <Button style={styles.Enviar} title="Enviar" onPress={handleSignUp} />
+      <Button style={styles.Enviar} title='Enviar' onPress={handleSignUp} />
     </View>
   );
 };
@@ -71,5 +64,5 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 10,
-  }
+  },
 });

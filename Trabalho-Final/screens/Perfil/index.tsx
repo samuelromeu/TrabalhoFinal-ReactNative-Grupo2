@@ -1,65 +1,73 @@
-import { View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity, Button } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Header } from '@react-navigation/stack';
-import { useAuth } from '../../contexts/AuthContext';
-import { MensagemScreen } from '../Feed/MensagemScreen';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
+import React, { useContext} from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import AuthContext from '../../service/AuthContext';
+
 
 export default function Perfil() {
-  
   const navigation = useNavigation();
-  const { user, signed } = useAuth();
-  return ( 
+  const { user } = useContext(AuthContext)
+
+  return (
     <SafeAreaView>
-      <View  style={styles.Header} >
-      <ImageBackground 
-        source={require('../../assets/Fundo.jpg')} 
-        style={styles.imagemFundo} 
-      >
-      <Image
-        source={require('../../assets/FotoPerfil.png')} 
-        style={styles.imagemPerfil} 
-      />
-      </ImageBackground>
-            </View>
+      <View style={styles.Header}>
+        <ImageBackground
+          source={require('../../assets/Fundo.jpg')}
+          style={styles.imagemFundo}
+        >
+          <Image
+            source={require('../../assets/FotoPerfil.png')}
+            style={styles.imagemPerfil}
+          />
+        </ImageBackground>
+      </View>
 
-        <View style={styles.InfoPerfil}>
-       <View>
-        <Text style={styles.NomePerfil}>NomeUsuario</Text>
-        <Text style={styles.ArrobaPerfil}>@Usario{user?.nome}</Text>
-       </View>
-
-      <TouchableOpacity style={styles.button} >
-        <Text >Editar Perfil</Text>
-      </TouchableOpacity>
+      <View style={styles.InfoPerfil}>
+        <View>
+          <Text style={styles.NomePerfil}>{user?.nome || 'NomeUsuario'}</Text>
+          <Text style={styles.ArrobaPerfil}>@{user?.nome || 'Usuario'}</Text>
         </View>
-        <View style={styles.Bio}>
 
-          <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero a libero pretium, vitae interdum libero aliquet. In hac habitasse platea dictumst.</Text>
-        </View>
-        <View style={styles.Seguidores}>
+        <TouchableOpacity style={styles.button}>
+          <Text>Editar Perfil</Text>
+        </TouchableOpacity>
+      </View>
 
+      <View style={styles.Bio}>
+        <Text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+          convallis libero a libero pretium, vitae interdum libero aliquet. In
+          hac habitasse platea dictumst.
+        </Text>
+      </View>
+
+      <View style={styles.Seguidores}>
         <Text style={styles.NumeroSeguidoresInfo}>X </Text>
+        <Text style={styles.SeguidoresInfo}>Seguidores</Text>
+        <Text style={styles.NumeroSeguidoresInfo}>20 </Text>
+        <Text style={styles.SeguidoresInfo}>Seguindo</Text>
+      </View>
 
-        <Text style={styles.SeguidoresInfo} >Seguidores  </Text>
+      <View style={styles.line} />
 
-        <Text style={styles.NumeroSeguidoresInfo} >20 </Text>
-
-        <Text style={styles.SeguidoresInfo} >Seguindo</Text>
-    </View>
-    
-
-    <View style={styles.line} />
-
-    <TouchableOpacity style={styles.Twittar} onPress={() => navigation.navigate("Tweet")}>
-      <Text style={styles.TwittarText}>+</Text>
-    </TouchableOpacity>
-
+      <TouchableOpacity
+        style={styles.Twittar}
+        onPress={() => navigation.navigate('Tweet')}
+      >
+        <Text style={styles.TwittarText}>+</Text>
+      </TouchableOpacity>
     </SafeAreaView>
-    
-  )
+  );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 100,
-    marginLeft: 10
+    marginLeft: 10,
   },
   imagemFundo: {
     width: '100%',
@@ -82,10 +90,9 @@ const styles = StyleSheet.create({
   },
   NomePerfil: {
     fontSize: 18,
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
   },
-  ArrobaPerfil: {
-  },
+  ArrobaPerfil: {},
   button: {
     alignItems: 'center',
     padding: 10,
@@ -97,33 +104,30 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   InfoPerfil: {
-    marginLeft:20,
-    flexDirection:'row',
-    justifyContent:'space-between'
+    marginLeft: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  SeguidoresInfo: {
-    
-  },
+  SeguidoresInfo: {},
   NumeroSeguidoresInfo: {
-    fontWeight: 'bold', 
+    fontWeight: 'bold',
     fontSize: 15,
-
   },
   Seguidores: {
-    marginLeft:20,
-    flexDirection:'row',
-  }, 
-  line:{
+    marginLeft: 20,
+    flexDirection: 'row',
+  },
+  line: {
     height: 2,
     width: '100%',
     backgroundColor: '#000',
     marginVertical: 20,
-  }, 
+  },
   Bio: {
     marginVertical: 20,
     marginLeft: 20,
   },
-  Twittar: {   
+  Twittar: {
     borderRadius: 50,
     borderWidth: 2,
     borderColor: '#1DA1F2',
@@ -141,5 +145,5 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: 'white',
     textAlign: 'center',
-  }
+  },
 });

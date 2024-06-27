@@ -1,10 +1,13 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
+import AuthContext from "../../service/AuthContext";
 
 export default function CustomDrawer(props) {
+  const { user } = useContext(AuthContext);
+
   return (
-    <DrawerContentScrollView>
+    <DrawerContentScrollView {...props}>
       <View
         style={{
           marginTop: 20,
@@ -16,14 +19,17 @@ export default function CustomDrawer(props) {
         }}
       >
         <Image
-          source={require("../../assets/Perfil.png")}
+          source={require("../../assets/Perfil.png")}r
           style={{ width: 65, height: 65 }}
         />
         <Text style={{ fontSize: 18, marginTop: 5, color: "#000" }}>
-          Bem vindo !
+          Bem vindo!
+        </Text>
+        <Text style={{ fontSize: 18, marginTop: 5, color: "#000" }}>
+          {user?.nome || "usuário"}
         </Text>
       </View>
-      <DrawerItemList {...props}/>
+      <DrawerItemList {...props} />
     </DrawerContentScrollView>
   );
 }
