@@ -10,39 +10,51 @@ import TabNavigator from './tabNavigator';
 import SplashScreen from '../screens/Splash';
 import LoginScreen from '../screens/Login/LoginScreen';
 import { SignUpScreen } from '../screens/Login/SignUpScreen';
-import { AuthProvider } from '../service/AuthContext';
+import { AuthProvider, useAuth } from '../service/AuthContext';
 
 const Drawer = createDrawerNavigator();
 
-export default function Routes() {
+function DrawerRoutes() {
+  const { signed } = useAuth();
+
   return (
-    <AuthProvider>
     <Drawer.Navigator
-      initialRouteName="Splash"
+      initialRouteName='Splash'
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
-        drawerActiveBackgroundColor: "#00dae5",
-        drawerInactiveBackgroundColor: "#fafaf2",
-        drawerInactiveTintColor: "#ff0000",
-        drawerActiveTintColor: "#00ff",
+        drawerActiveBackgroundColor: '#00dae5',
+        drawerInactiveBackgroundColor: '#fafaf2',
+        drawerInactiveTintColor: '#000',
+        drawerActiveTintColor: '#00ff',
         drawerStyle: {
-          backgroundColor: "#fafaf2",
+          backgroundColor: '#fafaf2',
           width: 300,
         },
       }}
     >
       <Drawer.Screen
-        name="Inicio"
+        name='Inicio'
         component={TabNavigator}
         options={{ drawerLabel: 'Inicio', headerShown: true }}
       />
-      <Drawer.Screen name="Perfil" component={Perfil} />
-      <Drawer.Screen name="Tweet" component={Tweet} />
-      <Drawer.Screen name="Splash" component={SplashScreen} />
-      <Drawer.Screen name="Login" component={LoginScreen} />
-      <Drawer.Screen name="SignUp" component={SignUpScreen} />
+      <Drawer.Screen name='Perfil' component={Perfil} />
+      <Drawer.Screen name='Tweet' component={Tweet} />
+      <Drawer.Screen name='Splash' component={SplashScreen} />
+      {!signed && (
+        <>
+          <Drawer.Screen name='Login' component={LoginScreen} />
+          <Drawer.Screen name='SignUp' component={SignUpScreen} />
+        </>
+      )}
     </Drawer.Navigator>
+  );
+}
+
+export default function Routes() {
+  return (
+    <AuthProvider>
+      <DrawerRoutes />
     </AuthProvider>
   );
 }
