@@ -19,7 +19,7 @@ export default function CustomDrawer(props) {
         }}
       >
         <Image
-          source={require("../../assets/Perfil.png")}r
+          source={require("../../assets/Perfil.png")}
           style={{ width: 65, height: 65 }}
         />
         <Text style={{ fontSize: 18, marginTop: 5, color: "#000" }}>

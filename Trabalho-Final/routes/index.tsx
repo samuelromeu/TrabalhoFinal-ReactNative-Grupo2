@@ -1,7 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Feather from 'react-native-vector-icons/Feather';
-import Feed from '../screens/Feed';
 import Perfil from '../screens/Perfil';
 import Search from '../screens/Search';
 import Tweet from '../screens/Tweet';
@@ -23,10 +22,10 @@ function DrawerRoutes() {
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
-        drawerActiveBackgroundColor: '#00dae5',
+        drawerActiveBackgroundColor: '#00acee',
         drawerInactiveBackgroundColor: '#fafaf2',
         drawerInactiveTintColor: '#000',
-        drawerActiveTintColor: '#00ff',
+        drawerActiveTintColor: '#000',
         drawerStyle: {
           backgroundColor: '#fafaf2',
           width: 300,

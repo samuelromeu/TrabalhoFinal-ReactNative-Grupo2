@@ -13,6 +13,7 @@ export default function TabNavigator() {
         name="Feed"
         component={Feed}
         options={{
+          headerShown:false,
           tabBarActiveTintColor: '#00acee',
           tabBarInactiveTintColor: 'grey',
           tabBarIcon: ({ color, size }) => (
@@ -24,6 +25,7 @@ export default function TabNavigator() {
         name="Pesquisar"
         component={Search}
         options={{
+          headerShown:false,
           tabBarActiveTintColor: '#00acee',
           tabBarInactiveTintColor: 'grey',
           tabBarIcon: ({ color, size }) => (

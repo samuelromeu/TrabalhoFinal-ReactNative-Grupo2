@@ -35,10 +35,7 @@ export default function Perfil() {
           <Text style={styles.NomePerfil}>{user?.nome || 'NomeUsuario'}</Text>
           <Text style={styles.ArrobaPerfil}>@{user?.nome || 'Usuario'}</Text>
         </View>
-
-        <TouchableOpacity style={styles.button}>
-          <Text>Editar Perfil</Text>
-        </TouchableOpacity>
+    
       </View>
 
       <View style={styles.Bio}>
@@ -51,17 +48,14 @@ export default function Perfil() {
 
       <View style={styles.Seguidores}>
         <Text style={styles.NumeroSeguidoresInfo}>X </Text>
-        <Text style={styles.SeguidoresInfo}>Seguidores</Text>
+        <Text style={styles.SeguidoresInfo}>Seguidores  </Text>
         <Text style={styles.NumeroSeguidoresInfo}>20 </Text>
         <Text style={styles.SeguidoresInfo}>Seguindo</Text>
       </View>
 
       <View style={styles.line} />
 
-      <TouchableOpacity
-        style={styles.Twittar}
-        onPress={() => navigation.navigate('Tweet')}
-      >
+      <TouchableOpacity style={styles.Twittar} onPress={() => navigation.navigate("Tweet")}>
         <Text style={styles.TwittarText}>+</Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -69,10 +63,11 @@ export default function Perfil() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  Header: {
+    marginBottom: 60,
   },
   imagemPerfil: {
     marginTop: 100,
@@ -84,9 +79,6 @@ const styles = StyleSheet.create({
   imagemFundo: {
     width: '100%',
     height: 150,
-  },
-  Header: {
-    marginBottom: 60,
   },
   NomePerfil: {
     fontSize: 18,
@@ -129,21 +121,19 @@ const styles = StyleSheet.create({
   },
   Twittar: {
     borderRadius: 50,
-    borderWidth: 2,
-    borderColor: '#1DA1F2',
     backgroundColor: '#1DA1F2',
-    width: 70,
-    height: 70,
-    margin: 10,
-    alignSelf: 'flex-end',
+    width: 60,
+    height: 60,
     justifyContent: 'center',
-    marginTop: 380,
-    position: 'static',
-    marginRight: 20,
+    alignItems: 'center',
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
   },
   TwittarText: {
-    fontSize: 50,
+    fontSize: 40,
     color: 'white',
     textAlign: 'center',
+    textAlignVertical: 'center',
   },
 });
