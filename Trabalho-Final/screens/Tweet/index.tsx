@@ -1,12 +1,9 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import SplashScreen from '../Splash/Splash'
+import { MensagemScreen } from '../Feed/MensagemScreen'
 
 export default function Tweet() {
   return (
-    <View>
-      <Text>Tweet</Text>
-    
-    </View>
+      <MensagemScreen/>
   )
 }

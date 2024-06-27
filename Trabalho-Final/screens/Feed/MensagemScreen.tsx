@@ -42,7 +42,7 @@ export const MensagemScreen: React.FC = () => {
         value={nome}
         onChangeText={setNome}
       /> */}
-      <Button title="Enviar" onPress={handleSignUp} />
+      <Button style={styles.Enviar} title="Enviar" onPress={handleSignUp} />
     </View>
   );
 };
@@ -64,4 +64,12 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 12,
   },
+  Enviar: {
+    padding: 10,
+    borderRadius: 50,
+    borderWidth: 2,
+    width: 50,
+    height: 50,
+    marginRight: 10,
+  }
 });
