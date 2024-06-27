@@ -1,15 +1,15 @@
-import { View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, ImageBackground, TouchableOpacity, Button } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Header } from '@react-navigation/stack';
 import { useAuth } from '../../contexts/AuthContext';
+import { MensagemScreen } from '../Feed/MensagemScreen';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Perfil() {
   
+  const navigation = useNavigation();
   const { user, signed } = useAuth();
-  console.log(user?.nome);
-   const name = user?.nome
-
   return ( 
     <SafeAreaView>
       <View  style={styles.Header} >
@@ -26,9 +26,8 @@ export default function Perfil() {
 
         <View style={styles.InfoPerfil}>
        <View>
-        
-        <Text style={styles.NomePerfil}>{name}</Text>
-        <Text style={styles.ArrobaPerfil}>dfdfd</Text>
+        <Text style={styles.NomePerfil}>NomeUsuario</Text>
+        <Text style={styles.ArrobaPerfil}>@Usario{user?.nome}</Text>
        </View>
 
       <TouchableOpacity style={styles.button} >
@@ -49,10 +48,16 @@ export default function Perfil() {
 
         <Text style={styles.SeguidoresInfo} >Seguindo</Text>
     </View>
+    
 
     <View style={styles.line} />
 
+    <TouchableOpacity style={styles.Twittar} onPress={() => navigation.navigate("Tweet")}>
+      <Text style={styles.TwittarText}>+</Text>
+    </TouchableOpacity>
+
     </SafeAreaView>
+    
   )
 }
 const styles = StyleSheet.create({
@@ -117,6 +122,24 @@ const styles = StyleSheet.create({
   Bio: {
     marginVertical: 20,
     marginLeft: 20,
+  },
+  Twittar: {   
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: '#1DA1F2',
+    backgroundColor: '#1DA1F2',
+    width: 70,
+    height: 70,
+    margin: 10,
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    marginTop: 380,
+    position: 'static',
+    marginRight: 20,
+  },
+  TwittarText: {
+    fontSize: 50,
+    color: 'white',
+    textAlign: 'center',
   }
-
 });

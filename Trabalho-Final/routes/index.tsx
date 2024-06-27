@@ -25,11 +25,11 @@ function DrawerRoutes() {
         headerShown: false,
         drawerActiveBackgroundColor: '#00dae5',
         drawerInactiveBackgroundColor: '#fafaf2',
-        drawerInactiveTintColor: '#ff0000',
+        drawerInactiveTintColor: '#000',
         drawerActiveTintColor: '#00ff',
         drawerStyle: {
           backgroundColor: '#fafaf2',
-          width: 240,
+          width: 300,
         },
       }}
     >
