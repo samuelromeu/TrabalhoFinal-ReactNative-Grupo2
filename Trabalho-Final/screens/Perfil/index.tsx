@@ -6,18 +6,21 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'; // Importa o hook de navegação
 import AuthContext from '../../service/AuthContext';
-
+import MensagemScreen from '../Feed/MensagemScreen';
+import Feed from '../Feed';
+import Tweet from '../Tweet';
 
 export default function Perfil() {
-  const navigation = useNavigation();
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
+  const navigation = useNavigation(); // Usa o hook de navegação
+
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.Header}>
         <ImageBackground
           source={require('../../assets/Fundo.jpg')}
@@ -35,27 +38,22 @@ export default function Perfil() {
           <Text style={styles.NomePerfil}>{user?.nome || 'NomeUsuario'}</Text>
           <Text style={styles.ArrobaPerfil}>@{user?.nome || 'Usuario'}</Text>
         </View>
-    
       </View>
 
       <View style={styles.Bio}>
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-          convallis libero a libero pretium, vitae interdum libero aliquet. In
-          hac habitasse platea dictumst.
+          {user?.bio}
         </Text>
       </View>
 
       <View style={styles.Seguidores}>
-        <Text style={styles.NumeroSeguidoresInfo}>X </Text>
-        <Text style={styles.SeguidoresInfo}>Seguidores  </Text>
-        <Text style={styles.NumeroSeguidoresInfo}>20 </Text>
+        <Text style={styles.NumeroSeguidoresInfo}>20</Text>
         <Text style={styles.SeguidoresInfo}>Seguindo</Text>
       </View>
 
       <View style={styles.line} />
 
-      <TouchableOpacity style={styles.Twittar} onPress={() => navigation.navigate("Tweet")}>
+      <TouchableOpacity style={styles.Twittar}>
         <Text style={styles.TwittarText}>+</Text>
       </TouchableOpacity>
     </SafeAreaView>

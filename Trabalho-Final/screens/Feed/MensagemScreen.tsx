@@ -1,17 +1,20 @@
-import React, { useContext, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useContext, useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useState} from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import AuthContext from '../../service/AuthContext';
 
 export const MensagemScreen: React.FC = () => {
   const navigation = useNavigation();
   const { sigPost, errorMessage, user } = useContext(AuthContext);
-  const { sigPost, errorMessage } = useContext(AuthContext);
   const [mensagem, setMensagem] = useState('');
   const [localError, setLocalError] = useState<string | null>(null);
-  const { user } = useContext(AuthContext)
 
   const handleSignUp = async () => {
     if (!mensagem) {
@@ -20,9 +23,9 @@ export const MensagemScreen: React.FC = () => {
     }
     setLocalError(null);
     const nomeUsuario = user?.nome || 'Anônimo';
-    const newPost = { mensagem, nomeUsuario  };
+    const newPost = { mensagem, nomeUsuario };
     await sigPost(newPost);
-    navigation.goBack()
+    navigation.goBack();
   };
 
   return (
@@ -33,7 +36,6 @@ export const MensagemScreen: React.FC = () => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.enviarButton} onPress={handleSignUp}>
           <Text style={styles.pubicarText}>Publicar</Text>
-          
         </TouchableOpacity>
       </View>
       {localError && <Text style={styles.error}>{localError}</Text>}
@@ -45,7 +47,7 @@ export const MensagemScreen: React.FC = () => {
         />
         <TextInput
           style={styles.input}
-          placeholder="O que está acontecendo?"
+          placeholder='O que está acontecendo?'
           value={mensagem}
           onChangeText={setMensagem}
           multiline
@@ -57,13 +59,6 @@ export const MensagemScreen: React.FC = () => {
         value={mensagem}
         onChangeText={setMensagem}
       />
-      {/* <TextInput
-        style={styles.input}
-        placeholder="Nome"
-        value={nome}
-        onChangeText={setNome}
-      /> */}
-      <Button style={styles.Enviar} title='Enviar' onPress={handleSignUp} />
     </View>
   );
 };
@@ -108,13 +103,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#1DA1F2',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:2,
+    marginTop: 2,
   },
   closeButtonText: {
     fontSize: 22,
     marginLeft: 3,
-    marginBottom:2,
-    transform: [{ scaleY: 0.8 }], // Achatamento horizontal
+    marginBottom: 2,
+    transform: [{ scaleY: 0.8 }], 
   },
   pubicarText: {
     fontSize: 18,
@@ -122,6 +117,5 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-
 
 export default MensagemScreen;

@@ -1,8 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Feather from 'react-native-vector-icons/Feather';
 import Perfil from '../screens/Perfil';
-import Search from '../screens/Search';
 import Tweet from '../screens/Tweet';
 import CustomDrawer from '../components/customDrawer';
 import TabNavigator from './tabNavigator';
@@ -14,7 +12,7 @@ import { AuthProvider, useAuth } from '../service/AuthContext';
 const Drawer = createDrawerNavigator();
 
 function DrawerRoutes() {
-  const { signed } = useAuth();
+  const { signed, signOut } = useAuth();
 
   return (
     <Drawer.Navigator
@@ -46,6 +44,9 @@ function DrawerRoutes() {
           <Drawer.Screen name='SignUp' component={SignUpScreen} />
         </>
       )}
+
+      
+
     </Drawer.Navigator>
   );
 }

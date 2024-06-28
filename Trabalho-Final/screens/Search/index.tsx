@@ -1,42 +1,62 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import api from '../../service/api';
 import { FontAwesome } from '@expo/vector-icons';
 import LikeButton from '../../components/LikeButton';
 
 interface Mensagem {
   id: number;
+  nomeUsuario: string;
   mensagem: string;
-  autor: {
-    nome: string;
-    avatar: string;
-  };
 }
 
 const SearchScreen: React.FC = () => {
   const [query, setQuery] = useState('');
   const [mensagens, setMensagens] = useState<Mensagem[]>([]);
+  const [filteredMensagens, setFilteredMensagens] = useState<Mensagem[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const searchMensagens = async () => {
-    setLoading(true);
-    try {
-      const response = await api.get<Mensagem[]>('/post/search', { params: { query } });
-      setMensagens(response.data);
-    } catch (error) {
-      console.error('Erro ao buscar mensagens:', error);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    const fetchMensagens = async () => {
+      setLoading(true);
+      try {
+        const response = await api.get<Mensagem[]>('/post');
+        setMensagens(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar mensagens:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMensagens();
+  }, []);
+
+  useEffect(() => {
+    if (query) {
+      const filtered = mensagens.filter((mensagem) =>
+        mensagem.mensagem.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredMensagens(filtered);
+    } else {
+      setFilteredMensagens([]);
     }
-  };
+  }, [query, mensagens]);
 
   const renderItem = ({ item }: { item: Mensagem }) => (
     <View style={styles.messageContainer}>
       <View style={styles.separator} />
       <View style={styles.messageContent}>
         <View style={styles.userInfo}>
-          {/* <Image source={{ uri: item.autor.avatar }} style={styles.avatar} /> */}
-          {/* <Text style={styles.authorName}>{item.autor.nome}</Text> */}
+          <Text style={styles.authorName}>{item.nomeUsuario}</Text>
         </View>
         <Text style={styles.messageText}>{item.mensagem}</Text>
         <LikeButton />
@@ -50,20 +70,28 @@ const SearchScreen: React.FC = () => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Buscar tweets..."
+          placeholder='Buscar mensagens...'
           value={query}
           onChangeText={setQuery}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={searchMensagens} disabled={loading}>
-          <FontAwesome name="search" size={24} color="#1DA1F2" />
+        <TouchableOpacity
+          style={styles.searchButton}
+          onPress={() => setQuery(query)}
+          disabled={loading}
+        >
+          <FontAwesome name='search' size={24} color='#1DA1F2' />
         </TouchableOpacity>
       </View>
-      <FlatList
-        data={mensagens}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-        contentContainerStyle={{ paddingBottom: 16 }}
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color="#1DA1F2" />
+      ) : (
+        <FlatList
+          data={filteredMensagens}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          contentContainerStyle={{ paddingBottom: 16 }}
+        />
+      )}
     </View>
   );
 };

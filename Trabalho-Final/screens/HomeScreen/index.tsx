@@ -11,7 +11,7 @@ const MainScreen: React.FC = () => {
       <Text style={styles.text}>Bem-vindo, {user?.nome}!</Text>
       <Button title="Sair" onPress={signOut} />
 
-      <ListUsers/>
+      {/* <ListUsers/> */}
 
     </View>
   );
